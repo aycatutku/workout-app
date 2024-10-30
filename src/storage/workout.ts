@@ -1,4 +1,4 @@
-import { Workout } from '../types/data';
+import { Workout } from '@types/data';
 import {
  containsKey, getData, removeItem, storeData 
 } from './index';

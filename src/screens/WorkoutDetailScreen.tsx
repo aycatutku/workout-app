@@ -13,11 +13,7 @@ type DetailParams = {
 type Navigation = NativeStackHeaderProps & DetailParams;
 
 export default function WorkoutDetailScreen({ route }: Navigation) {
-  return (
-    <View style={styles.container}>
-      <MontserratText style={styles.header}>Slug -{route.params.slug}</MontserratText>
-    </View>
-  );
+  return <View style={styles.container}>Slug -{route.params.slug}</View>;
 }
 
 const styles = StyleSheet.create({

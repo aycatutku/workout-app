@@ -1,7 +1,7 @@
 import { Pressable, View, StyleSheet, FlatList } from 'react-native';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
+import { Workout } from '@types/data';
 import data from '../../data.json';
-import { Workout } from '../types/data';
 import WorkoutItem from '../components/workoutItem';
 import MontserratText from '../components/styled/MontserratText';
 
