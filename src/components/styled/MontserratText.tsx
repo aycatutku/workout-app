@@ -1,12 +1,8 @@
-import {Text} from "react-native";
-import React from "react";
+import { Text } from 'react-native';
+import React from 'react';
 
-export function MontserratText(props: Text["props"]) {
-    return (
-        <Text
-            {...props}
-            style={[props.style,{fontFamily: "montserrat"}]}
-        />
-
-    )
+function MontserratText({ style, ...rest }: Text['props']) {
+  return <Text {...rest} style={[style, { fontFamily: 'montserrat' }]} />;
 }
+
+export default MontserratText;

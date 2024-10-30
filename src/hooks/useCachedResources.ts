@@ -1,32 +1,29 @@
-import {useEffect, useState} from "react";
-import * as Font from "expo-font";
-import {getData, storeData} from "../storage";
-import data from "../../data.json";
+/* eslint-disable */
+
+import { useEffect, useState } from 'react';
+import * as Font from 'expo-font';
+import { initWorkouts } from '../storage/workout';
 
 export default function useCachedResources() {
-    const [isLoadingCompleted, setIsLoadingComplete] = useState(false);
+  const [isLoadingCompleted, setIsLoadingComplete] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
+    async function loadResourcesAndDataAsync() {
+      try {
+        await initWorkouts();
+        await Font.loadAsync({
+          montserrat: require('../../assets/fonts/Montserrat-Regular.ttf'),
+          'montserrat-bold': require('../../assets/fonts/Montserrat-Bold.ttf'),
+        });
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setIsLoadingComplete(true);
+      }
+    }
 
-        async function loadResourcesAndDataAsync() {
-            try {
-                await storeData("workout-data", data);
-                await Font.loadAsync({
-                    "montserrat": require("../../assets/fonts/Montserrat-Regular.ttf"),
-                    "montserrat-bold": require("../../assets/fonts/Montserrat-Bold.ttf"),
-                })
-            } catch (e) {
-                console.warn(e);
-            } finally {
-                const workouts = await getData("workout-data");
-                console.warn(workouts)
-                setIsLoadingComplete(true);
-            }
-        }
+    loadResourcesAndDataAsync().then();
+  }, [isLoadingCompleted]);
 
-        loadResourcesAndDataAsync();
-
-    }, [isLoadingCompleted])
-
-    return isLoadingCompleted;
+  return isLoadingCompleted;
 }
